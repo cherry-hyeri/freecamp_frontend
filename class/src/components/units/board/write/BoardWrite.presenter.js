@@ -1,16 +1,20 @@
+import { BlueButton, RedInput } from "./BoardWrite.styles";
+
 export default function BoardWriteUI(props) {
   return (
     <>
       작성자:
-      <input type="text" onChange={props.bbb} />
+      <RedInput type="text" onChange={props.onChangeWriter} />
       <br />
       제목:
-      <input type="text" onChange={props.ccc} />
+      <input type="text" onChange={props.onChangeTitle} />
       <br />
       내용:
-      <input type="text" onChange={props.ddd} />
+      <input type="text" onChange={props.onChangeContents} />
       <br />
-      <button onClick={props.aaa}>GRAPHQL-API(동기) 요청하기</button>
+      <BlueButton onClick={props.onClickSubmit}>
+        GRAPHQL-API(동기) 요청하기
+      </BlueButton>
     </>
   );
 }

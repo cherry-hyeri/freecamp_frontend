@@ -1,18 +1,8 @@
 import BoardWriteUI from "./BoardWrite.presenter";
-import { useMutation, gql } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useState } from "react";
+import { CREATE_BOARD } from "./BoardWrite.queries";
 
-const CREATE_BOARD = gql`
-  ##변수의 타입 적는 곳
-  mutation createBoard($writer: String, $title: String, $contents: String) {
-    ##실제 우리가 전달할 변수 적는 곳
-    createBoard(writer: $writer, title: $title, contents: $contents) {
-      _id
-      number
-      message
-    }
-  }
-`;
 export default function BoardWrite() {
   const [writer, setWriter] = useState("");
   const [title, setTitle] = useState("");
@@ -45,10 +35,10 @@ export default function BoardWrite() {
   };
   return (
     <BoardWriteUI
-      aaa={onClickSubmit}
-      bbb={onChangeWriter}
-      ccc={onChangeTitle}
-      ddd={onChangeContents}
+      onClickSubmit={onClickSubmit}
+      onChangeWriter={onChangeWriter}
+      onChangeTitle={onChangeTitle}
+      onChangeContents={onChangeContents}
     />
   );
 }
