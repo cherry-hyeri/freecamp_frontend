@@ -18,7 +18,7 @@ export default function BoardWriteUI(props) {
         zzz={props.mycolor}
         onClick={props.onClickSubmit}
       >
-        GRAPHQL-API(동기) 요청하기
+        {props.isEdit ? "수정하기" : "등록하기"}
       </BlueButton>
     </>
   );

@@ -2,8 +2,11 @@ import BoardWriteUI from "./BoardWrite.presenter";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { CREATE_BOARD } from "./BoardWrite.queries";
+import { useRouter } from "next/router";
 
 export default function BoardWrite(props) {
+  const router = useRouter();
+
   const [mycolor, setMycolor] = useState(false);
 
   const [writer, setWriter] = useState("");
@@ -23,6 +26,7 @@ export default function BoardWrite(props) {
     });
     console.log(result);
     alert(result.data.createBoard.message);
+    router.push(`/08-05-board/${result.data.createBoard.number}`);
   };
 
   const onChangeWriter = (event) => {
