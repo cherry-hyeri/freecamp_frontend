@@ -1,7 +1,7 @@
 import BoardWriteUI from "./BoardWrite.presenter";
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
-import { CREATE_BOARD } from "./BoardWrite.queries";
+import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { useRouter } from "next/router";
 
 export default function BoardWrite(props) {
@@ -13,6 +13,7 @@ export default function BoardWrite(props) {
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
   const [createBoard] = useMutation(CREATE_BOARD);
+  const [updateBoard] = useMutation(UPDATE_BOARD);
 
   const onClickSubmit = async () => {
     // const writer = "qqq" 이 함수에 있으면 현재 스코프
@@ -27,6 +28,22 @@ export default function BoardWrite(props) {
     console.log(result);
     alert(result.data.createBoard.message);
     router.push(`/08-05-board/${result.data.createBoard.number}`);
+  };
+
+  const onClickUpdate = async () => {
+    //1. 수정하기 뮤테이션 날리기
+    const result = await updateBoard({
+      variables: {
+        number: Number(router.query.number),
+        writer,
+        title,
+        contents,
+      },
+    });
+    //2. 상세페이지로 이동하기
+    console.log(result);
+    alert(result.data.updateBoard.message);
+    router.push(`/08-05-board/${result.data.updateBoard.number}`);
   };
 
   const onChangeWriter = (event) => {
@@ -51,6 +68,7 @@ export default function BoardWrite(props) {
   return (
     <BoardWriteUI
       onClickSubmit={onClickSubmit}
+      onClickUpdate={onClickUpdate}
       onChangeWriter={onChangeWriter}
       onChangeTitle={onChangeTitle}
       onChangeContents={onChangeContents}

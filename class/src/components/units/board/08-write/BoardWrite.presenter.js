@@ -16,7 +16,7 @@ export default function BoardWriteUI(props) {
         rrr="15px"
         qqq="gary"
         zzz={props.mycolor}
-        onClick={props.onClickSubmit}
+        onClick={props.isEdit ? props.onClickUpdate : props.onClickSubmit}
       >
         {props.isEdit ? "수정하기" : "등록하기"}
       </BlueButton>
